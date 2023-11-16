@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
+import uz.example.cryptovalyuta.util.convertTimeCustom
 
 @Entity(tableName = "full_price_list")
 data class CoinPriceInfo(
@@ -54,7 +55,7 @@ data class CoinPriceInfo(
 
     @SerializedName("LASTUPDATE")
     @Expose
-    val lastupdate: Int? = null,
+    val lastupdate: Long? = null,
 
     @SerializedName("LASTVOLUME")
     @Expose
@@ -199,4 +200,11 @@ data class CoinPriceInfo(
     @SerializedName("IMAGEURL")
     @Expose
     val imageurl: String? = null
-)
+){
+    fun getTimeconverted():String{
+        return convertTimeCustom(lastupdate)
+    }
+    fun getImageLink():String{
+        return "http://cryptocompare.com/$imageurl"
+    }
+}

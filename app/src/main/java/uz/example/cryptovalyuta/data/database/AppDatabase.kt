@@ -1,21 +1,21 @@
-package uz.example.cryptovalyuta.database
+package uz.example.cryptovalyuta.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import uz.example.cryptovalyuta.pojos.CoinPriceInfo
+import uz.example.cryptovalyuta.data.model.CoinInfoDto
 
-@Database(entities = [CoinPriceInfo::class], version = 1, exportSchema = false)
+@Database(entities = [CoinInfoDbModel::class], version = 1, exportSchema = false)
 abstract class AppDatabase:RoomDatabase()  {
 
     companion object{
-        private var db:AppDatabase?= null
+        private var db: AppDatabase?= null
         private const val DB_NAME="main.db"
 
         private val LOCK = Any()
 
-        fun getInstens(context: Context):AppDatabase{
+        fun getInstens(context: Context): AppDatabase {
             synchronized(LOCK){
                 db?.let { return it }
                 val instans = Room.databaseBuilder(
@@ -28,7 +28,7 @@ abstract class AppDatabase:RoomDatabase()  {
             }
         }
     }
-    abstract fun coinPriceInfoDao():CoinPriceInfoDao
+    abstract fun coinPriceInfoDao(): CoinPriceInfoDao
 
 
 }

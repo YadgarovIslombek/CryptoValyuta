@@ -1,4 +1,4 @@
-package uz.example.cryptovalyuta
+package uz.example.cryptovalyuta.presentation
 
 import android.app.Application
 import com.mocklets.pluto.Pluto

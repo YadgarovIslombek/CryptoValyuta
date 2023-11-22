@@ -1,26 +1,25 @@
-package uz.example.cryptovalyuta.network
+package uz.example.cryptovalyuta.data.network
 
 import retrofit2.http.GET
 import retrofit2.http.Query
-import uz.example.cryptovalyuta.pojos.CoinInfo
-import uz.example.cryptovalyuta.pojos.CoinOfListDatum
-import uz.example.cryptovalyuta.pojos.CoinPriceInfoRowData
+import uz.example.cryptovalyuta.data.model.CoinNamesListDto
+import uz.example.cryptovalyuta.data.model.CoinInfoJsonContainerDto
 
 interface ApiService {
 
     @GET("top/totalvolfull")
     suspend fun getTopCoinsInfo(
         @Query(API_KEY)apiKey:String="",
-        @Query(LIMIT)limit:Int = 10,
+        @Query(LIMIT)limit:Int = 50,
         @Query(TSYM)tsym:String = CURRENCY,
-        ):CoinOfListDatum
+        ): CoinNamesListDto
 
     @GET("pricemultifull")
     suspend fun getFullInformation(
         @Query(API_KEY)apiKey:String = "",
         @Query(FSYM)fsym:String,
         @Query(TOSYM)tsyms:String = CURRENCY,
-    ):CoinPriceInfoRowData
+    ): CoinInfoJsonContainerDto
 
 
     companion object{

@@ -1,11 +1,11 @@
-package uz.example.cryptovalyuta.pojos
+package uz.example.cryptovalyuta.data.model
 
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
-data class CoinOfListDatum (
+data class CoinNamesListDto (
     @SerializedName("Data")
     @Expose
-    val data: List<Datum>? = null
+    val names: List<CoinNameContainerDto>? = null
 )

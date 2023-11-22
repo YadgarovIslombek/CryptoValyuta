@@ -1,4 +1,4 @@
-package uz.example.cryptovalyuta.network
+package uz.example.cryptovalyuta.data.network
 
 import com.mocklets.pluto.PlutoInterceptor
 import okhttp3.OkHttpClient
@@ -8,6 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     private const val BASE_URL = "https://min-api.cryptocompare.com/data/"
+     const val IMG = "https://cryptocompare.com/"
 
 
     fun getRetrofit():Retrofit{

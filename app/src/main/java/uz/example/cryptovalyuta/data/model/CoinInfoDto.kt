@@ -1,14 +1,15 @@
-package uz.example.cryptovalyuta.pojos
+package uz.example.cryptovalyuta.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
+import uz.example.cryptovalyuta.data.network.ApiClient.IMG
 import uz.example.cryptovalyuta.util.convertTimeCustom
 
-@Entity(tableName = "full_price_list")
-data class CoinPriceInfo(
+
+data class CoinInfoDto(
     @SerializedName("TYPE")
     @Expose
     val type: String? = null,
@@ -16,7 +17,7 @@ data class CoinPriceInfo(
     @SerializedName("MARKET")
     @Expose
     val market: String? = null,
-    @PrimaryKey
+
     @SerializedName("FROMSYMBOL")
     @Expose
     val fromSymbol: String,
@@ -205,6 +206,6 @@ data class CoinPriceInfo(
         return convertTimeCustom(lastupdate)
     }
     fun getImageLink():String{
-        return "http://cryptocompare.com/$imageurl"
+        return IMG + imageurl
     }
 }

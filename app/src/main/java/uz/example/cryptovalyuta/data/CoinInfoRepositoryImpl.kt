@@ -20,10 +20,10 @@ import uz.example.cryptovalyuta.data.workers.MyRefreshWorker
 import uz.example.cryptovalyuta.domain.CoinInfo
 import uz.example.cryptovalyuta.domain.CoinRepository
 
-class CoinInfoRepositoryImpl(private val application: Application) : CoinRepository {
+class CoinInfoRepositoryImpl(private var application: Application) : CoinRepository {
     private val coinInfoDao = AppDatabase.getInstens(application).coinPriceInfoDao()
     private val mapper = CoinMapper()
-    private val apiService = ApiClient.getRetrofit().create(ApiService::class.java)
+
 
     override fun getCoinInfoList(): LiveData<List<CoinInfo>> =
         MediatorLiveData<List<CoinInfo>>().apply {
@@ -43,7 +43,7 @@ class CoinInfoRepositoryImpl(private val application: Application) : CoinReposit
         val worker = WorkManager.getInstance(application)
         worker.enqueueUniqueWork(
             MyRefreshWorker.NAME,
-            ExistingWorkPolicy.APPEND,
+            ExistingWorkPolicy.REPLACE,
             MyRefreshWorker.makeRequest()
         )
     }

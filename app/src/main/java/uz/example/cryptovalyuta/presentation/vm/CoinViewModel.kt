@@ -33,7 +33,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
     fun getDetailInfo(fSmy: String) = getCoinInfoUseCase(fSmy)
 
     init {
-            loadDataUseCase()
+        loadDataUseCase()
     }
 
 

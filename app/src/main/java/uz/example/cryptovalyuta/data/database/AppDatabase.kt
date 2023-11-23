@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import uz.example.cryptovalyuta.data.model.CoinInfoDto
 
-@Database(entities = [CoinInfoDbModel::class], version = 1, exportSchema = false)
+@Database(entities = [CoinInfoDbModel::class], version = 2, exportSchema = false)
 abstract class AppDatabase:RoomDatabase()  {
 
     companion object{

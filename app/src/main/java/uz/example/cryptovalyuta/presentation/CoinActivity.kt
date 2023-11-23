@@ -20,8 +20,7 @@ class CoinActivity : AppCompatActivity() {
         setContentView(binding.root)
         coinViewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         adapter = CoinAdapter()
-        binding.rec.itemAnimator = null
-        binding.rec.adapter = adapter
+
         adapter.onclick = object : CoinAdapter.OnClickItem{
             override fun onCoinClick(coinInfo: CoinInfo) {
                 val newIntent = CoinActivityDetail.newIntent(this@CoinActivity, coinInfo.fromSymbol)
@@ -32,6 +31,8 @@ class CoinActivity : AppCompatActivity() {
         coinViewModel.coinInfoList.observe(this) {
            adapter.submitList(it)
         }
+        binding.rec.itemAnimator = null
+        binding.rec.adapter = adapter
 
     }
 

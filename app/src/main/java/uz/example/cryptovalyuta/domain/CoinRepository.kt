@@ -7,6 +7,6 @@ interface CoinRepository {
     fun getCoinInfoList():LiveData<List<CoinInfo>>
     fun getCoin(fromSymbol: String):LiveData<CoinInfo>
 
-    suspend fun loadData()
+     fun loadData()
 
 }

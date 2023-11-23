@@ -45,9 +45,13 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
 
     debugImplementation("com.mocklets:pluto:1.1.3")
     releaseImplementation("com.mocklets:pluto-no-op:1.1.3")
+
+    //viewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 
     implementation("androidx.room:room-runtime:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")

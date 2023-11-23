@@ -1,7 +1,7 @@
 package uz.example.cryptovalyuta.domain
 
 data class CoinInfo(
-    val fromSymbol: String?,
+    val fromSymbol: String,
     val toSymbol: String?,
     val price: Double?,
     val lastUpdate: Long?,

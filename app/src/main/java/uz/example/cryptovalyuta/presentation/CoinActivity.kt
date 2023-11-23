@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import uz.example.cryptovalyuta.databinding.ActivityCoinBinding
+import uz.example.cryptovalyuta.domain.CoinInfo
 import uz.example.cryptovalyuta.presentation.vm.CoinViewModel
 
 class CoinActivity : AppCompatActivity() {
@@ -18,14 +19,19 @@ class CoinActivity : AppCompatActivity() {
         binding = ActivityCoinBinding.inflate(layoutInflater)
         setContentView(binding.root)
         coinViewModel = ViewModelProvider(this)[CoinViewModel::class.java]
-        coinViewModel.getPriceList.observe(this, Observer {
-            adapter = CoinAdapter(it) {
-                val newIntent = CoinActivityDetail.newIntent(this, it.fromSymbol)
+        adapter = CoinAdapter()
+        binding.rec.itemAnimator = null
+        binding.rec.adapter = adapter
+        adapter.onclick = object : CoinAdapter.OnClickItem{
+            override fun onCoinClick(coinInfo: CoinInfo) {
+                val newIntent = CoinActivityDetail.newIntent(this@CoinActivity, coinInfo.fromSymbol)
                 startActivity(newIntent)
-
             }
-            binding.rec.adapter = adapter
-        })
+
+        }
+        coinViewModel.coinInfoList.observe(this) {
+           adapter.submitList(it)
+        }
 
     }
 

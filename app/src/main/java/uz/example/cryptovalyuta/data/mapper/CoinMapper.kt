@@ -38,7 +38,7 @@ class CoinMapper {
     }
 
     fun mapListDbModelEntity(namesListDto: CoinNamesListDto):String {
-        return namesListDto.names?.map { it.coinNameDto?.name }?.joinToString { "," } ?: ""
+        return namesListDto.names?.map { it.coinNameDto?.name }?.joinToString(",")?: ""
     }
 
         fun mapDbModelToEntity(dbModel: CoinInfoDbModel):CoinInfo{

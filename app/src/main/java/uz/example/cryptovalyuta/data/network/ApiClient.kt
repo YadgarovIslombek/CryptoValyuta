@@ -8,21 +8,24 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     private const val BASE_URL = "https://min-api.cryptocompare.com/data/"
-     const val IMG = "https://cryptocompare.com/"
+    const val IMG = "https://cryptocompare.com/"
 
 
-    fun getRetrofit():Retrofit{
-    val logging = HttpLoggingInterceptor()
+    fun okhttp(): OkHttpClient {
+        val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
 
-        val okhttp = OkHttpClient.Builder()
+     return  OkHttpClient.Builder()
             .addInterceptor(PlutoInterceptor())
             .build()
 
-        return Retrofit.Builder()
+    }
+
+        val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okhttp)
+            .client(okhttp())
             .build()
-    }
+
+    val apiService = retrofit.create(ApiService::class.java)
 }

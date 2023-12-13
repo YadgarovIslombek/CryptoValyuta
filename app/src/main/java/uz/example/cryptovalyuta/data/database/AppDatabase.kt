@@ -4,11 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import uz.example.cryptovalyuta.data.model.CoinInfoDto
 
 @Database(entities = [CoinInfoDbModel::class], version = 2, exportSchema = false)
 abstract class AppDatabase:RoomDatabase()  {
-
+abstract fun coinPriceInfoDao():  CoinPriceInfoDao
     companion object{
         private var db: AppDatabase?= null
         private const val DB_NAME="main.db"
@@ -29,7 +28,4 @@ abstract class AppDatabase:RoomDatabase()  {
             }
         }
     }
-    abstract fun coinPriceInfoDao(): CoinPriceInfoDao
-
-
 }

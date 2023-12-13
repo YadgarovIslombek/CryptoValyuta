@@ -6,8 +6,9 @@ import uz.example.cryptovalyuta.data.model.CoinInfoDto
 import uz.example.cryptovalyuta.data.model.CoinInfoJsonContainerDto
 import uz.example.cryptovalyuta.data.model.CoinNamesListDto
 import uz.example.cryptovalyuta.domain.CoinInfo
+import javax.inject.Inject
 
-class CoinMapper {
+class CoinMapper @Inject constructor() {
 
     fun coinInfoDtoToDbModel(dto:CoinInfoDto):CoinInfoDbModel{
         return CoinInfoDbModel(

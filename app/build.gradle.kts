@@ -40,6 +40,10 @@ android {
 }
 
 dependencies {
+
+    implementation ("com.google.dagger:dagger:2.48.1")
+    kapt ("com.google.dagger:dagger-compiler:2.48.1")
+
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")

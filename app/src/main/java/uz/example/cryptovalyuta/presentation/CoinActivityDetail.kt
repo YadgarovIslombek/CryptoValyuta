@@ -11,16 +11,26 @@ import uz.example.cryptovalyuta.R
 import uz.example.cryptovalyuta.data.network.ApiClient.IMG
 import uz.example.cryptovalyuta.databinding.ActivityCoinDetailBinding
 import uz.example.cryptovalyuta.presentation.vm.CoinViewModel
+import uz.example.cryptovalyuta.presentation.vm.CoinViewModel_Factory
+import uz.example.cryptovalyuta.presentation.vm.ViewModelFactory
 import uz.example.cryptovalyuta.util.convertTimeCustom
+import javax.inject.Inject
 
 class CoinActivityDetail : AppCompatActivity() {
     private lateinit var binding:ActivityCoinDetailBinding
     private lateinit var coinViewModel: CoinViewModel
+    @Inject
+     lateinit var coinviewmodelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (application as App).component
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityCoinDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        coinViewModel = ViewModelProvider(this)[CoinViewModel::class.java]
+        coinViewModel = ViewModelProvider(this,coinviewmodelFactory)[CoinViewModel::class.java]
         val key = intent.getStringExtra(KEY)?:""
         coinViewModel.getDetailInfo(key).observe(this, Observer {
             binding.tvPrice.text = it.price.toString()

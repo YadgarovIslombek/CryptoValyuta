@@ -10,23 +10,27 @@ import androidx.work.WorkerParameters
 
 import kotlinx.coroutines.delay
 import uz.example.cryptovalyuta.data.database.AppDatabase
+import uz.example.cryptovalyuta.data.database.CoinPriceInfoDao
 import uz.example.cryptovalyuta.data.mapper.CoinMapper
 import uz.example.cryptovalyuta.data.network.ApiClient
 import uz.example.cryptovalyuta.data.network.ApiService
 import uz.example.cryptovalyuta.domain.CoinInfo
 
-class MyRefreshWorker(context: Context, workerParameters: WorkerParameters) :
-    CoroutineWorker(context, workerParameters) {
-    private val coinInfoDao = AppDatabase.getInstens(context).coinPriceInfoDao()
-    private val mapper = CoinMapper()
-    private val apiService = ApiClient.getRetrofit().create(ApiService::class.java)
+class MyRefreshWorker(
+    context: Context,
+    workerParameters: WorkerParameters,
+    private val coinInfoDao: CoinPriceInfoDao,
+    private val apiService: ApiService,
+    private val mapper: CoinMapper
+) : CoroutineWorker(context, workerParameters) {
+
 
     override suspend fun doWork(): Result {
         while (true) {
             try {
                 val topCoins = apiService.getTopCoinsInfo(limit = 50)
                 val fSyms = mapper.mapListDbModelEntity(topCoins)
-                val jsonContainer = apiService.getFullInformation( fsym = fSyms)
+                val jsonContainer = apiService.getFullInformation(fsym = fSyms)
                 val coinInfoDtoList = mapper.maptoContainerToListCoinInfo(jsonContainer)
                 val dbModelList = coinInfoDtoList.map { mapper.coinInfoDtoToDbModel(it) }
                 coinInfoDao.inserPriceList(dbModelList)
@@ -35,7 +39,6 @@ class MyRefreshWorker(context: Context, workerParameters: WorkerParameters) :
             delay(10000)
         }
     }
-
 
 
     companion object {
